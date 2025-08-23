@@ -1,0 +1,19 @@
+browserrequest
+==============
+
+Extract cookies and user-agent from browser and fake browser request using Chrome's remote debugging protocol.
+
+Chrome must be running with remote debugging enabled:
+
+    google-chrome --remote-debugging-port=9222 --user-data-dir=/tmp/chrome
+
+Usage
+
+    req, _ := http.NewRequest("GET", "https://api.example.com", nil)
+	cookies := browserrequest.NewSession(&browserrequest.Options{ DebugURL: "ws://localhost:9222" })
+
+	if err := cookies.SetRequest(ctx, req); err != nil {
+		panic(err)
+	}
+
+    resp, _ := http.DefaultClient.Do(req)
