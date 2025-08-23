@@ -10,10 +10,19 @@ Chrome must be running with remote debugging enabled:
 Usage
 
     req, _ := http.NewRequest("GET", "https://api.example.com", nil)
-	cookies := browserrequest.NewSession(&browserrequest.Options{ DebugURL: "ws://localhost:9222" })
+	session := browserrequest.NewSession("ws://localhost:9222")
 
-	if err := cookies.SetRequest(ctx, req); err != nil {
+	if err := session.SetRequest(ctx, req); err != nil {
 		panic(err)
 	}
 
     resp, _ := http.DefaultClient.Do(req)
+
+HTTPClient
+
+	client := browserrequest.NewHTTPClient("ws://localhost:9222")
+
+	jsonData, _ := json.Marshal(reqBody)
+
+	req, _ := http.NewRequest("POST", "https://example.com")
+	resp, err := client.Do(req)

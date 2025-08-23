@@ -31,9 +31,7 @@ var reqBody = DualAssetsOrdersRequest{
 
 func main() {
 	log.Println("start")
-	client := browserrequest.NewHTTPClient(http.DefaultTransport, &browserrequest.Options{
-		DebugURL: "ws://localhost:9222",
-	})
+	client := browserrequest.NewHTTPClient("ws://localhost:9222")
 
 	jsonData, _ := json.Marshal(reqBody)
 

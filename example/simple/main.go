@@ -22,9 +22,7 @@ type DualAssetsOrdersRequest struct {
 }
 
 func main() {
-	cookies := browserrequest.NewSession(&browserrequest.Options{
-		DebugURL: "ws://localhost:9222",
-	})
+	session := browserrequest.NewSession("ws://localhost:9222")
 
 	reqBody := DualAssetsOrdersRequest{
 		ProductType:        2,
@@ -45,7 +43,7 @@ func main() {
 	req.Header.Set("accept", "application/json")
 
 	ctx := context.Background()
-	if err := cookies.SetRequest(ctx, req); err != nil {
+	if err := session.SetRequest(ctx, req); err != nil {
 		panic(err)
 	}
 
